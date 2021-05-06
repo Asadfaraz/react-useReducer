@@ -1,28 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Model from "./Model";
 import { data } from "../api";
 
+const reducer = (state, action) => {
+  // later
+};
+const defaultState = {
+  people: [],
+  isModalOpen: false,
+  modalContent: "",
+};
+
 const UseReducer = () => {
   const [name, setName] = useState("");
-  const [people, setPeople] = useState(data);
-  const [showModel, setShowModel] = useState(false);
+  //   const [people, setPeople] = useState(data);
+  //   const [showModel, setShowModel] = useState(false);
+  // starting useReducer
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (name) {
-      setShowModel(true);
-      setPeople([...people, { id: new Date().getTime().toString, name }]);
-
-      setName("");
     } else {
-      setShowModel(true);
     }
   };
 
   return (
     <>
-      {showModel && <Model />}
+      {state.isModalOpen && <Model modalContent={state.modalContent} />}
 
       <form onSubmit={handleSubmit} className="form">
         <div>
@@ -38,7 +44,7 @@ const UseReducer = () => {
       </form>
 
       {/* show list */}
-      {people.map((person) => {
+      {state.people.map((person) => {
         const { id, name } = person;
         return (
           <div key={id}>

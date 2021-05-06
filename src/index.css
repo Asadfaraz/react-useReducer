@@ -198,7 +198,7 @@ p {
 }
 .modal {
   position: absolute;
-  top: 2rem;
+  top: 0.8rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--clr-white);
