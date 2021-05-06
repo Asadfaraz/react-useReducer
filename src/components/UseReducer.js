@@ -1,4 +1,6 @@
 import React from "react";
+import Model from "./Model";
+import { data } from "../api";
 
 const UseReducer = () => {
   return (
