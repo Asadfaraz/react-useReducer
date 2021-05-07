@@ -19,6 +19,10 @@ const reducer = (state, action) => {
     return { ...state, isModalOpen: true, modalContent: "Please enter value" };
   }
 
+  if (action.type == "CLOSE_MODAL") {
+    return { ...state, isModalOpen: false };
+  }
+
   throw new Error("no matching action type");
 };
 const defaultState = {
@@ -34,6 +38,7 @@ const UseReducer = () => {
   // starting useReducer
   const [state, dispatch] = useReducer(reducer, defaultState);
 
+  // Form submission function
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -46,9 +51,18 @@ const UseReducer = () => {
     }
   };
 
+  // Closing modal function
+  const closeModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
+
+  // Return START from HERE
+
   return (
     <>
-      {state.isModalOpen && <Model modalContent={state.modalContent} />}
+      {state.isModalOpen && (
+        <Model modalContent={state.modalContent} closeModal={closeModal} />
+      )}
 
       <form onSubmit={handleSubmit} className="form">
         <div>
